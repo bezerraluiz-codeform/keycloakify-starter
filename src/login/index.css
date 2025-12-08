@@ -1,14 +1,80 @@
-@import url(./assets/fonts/geist/index.css);
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* Fundo preto, sem imagem, com fonte Geist */
 body.kcBodyClass {
-    @apply bg-[url(./assets/img/background.jpg)] bg-no-repeat bg-center bg-fixed;
-    @apply font-geist;
+    @apply bg-black bg-no-repeat bg-center bg-fixed font-geist;
+    background-image: none !important;
 }
 
-.kcHeaderWrapperClass {
-    @apply text-3xl font-bold underline;
+/* Card em preto, sem borda e sem sombra */
+.kcFormCardClass {
+    @apply bg-black border-none shadow-none;
+}
+
+/* Títulos e labels em branco */
+.kcLoginClass h1,
+.kcLoginClass h2,
+.kcLoginClass h3,
+.kcLoginClass label {
+    @apply text-white;
+}
+
+/* Exemplo de customização do header */
+.kcInfoAreaWrapperClass {
+    @apply bg-black;
+    background-color: #000 !important;
+}
+
+.kcLoginClass input,
+.kcLoginClass select,
+.kcLoginClass textarea {
+    background-color: #000 !important;
+    border: 1px solid #2c2b2b !important;
+    border-radius: 6px !important;
+    color: #fff;
+}
+
+.kcInputGroup,
+.kcFormPasswordVisibilityButtonClass {
+    background-color: #000 !important;
+}
+
+.kcInputGroup {
+    display: flex;
+    align-items: stretch;
+}
+
+.kcFormPasswordVisibilityButtonClass {
+    border: 1px solid #2c2b2b !important;
+    border-left: 0 !important;
+    border-radius: 0 6px 6px 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 12px !important;
+    height: 36px !important;
+    min-height: 36px !important;
+    box-shadow: none !important;
+}
+
+/* Ajuste para o input de senha alinhar com o botão de visibilidade */
+.kcInputGroup input[type="password"],
+.kcInputGroup input[type="text"] {
+    border-radius: 6px 0 0 6px !important;
+    border-right: 0 !important;
+    height: 36px !important;
+    min-height: 36px !important;
+}
+
+.kcFormPasswordVisibilityButtonClass::after,
+.kcFormPasswordVisibilityButtonClass::before {
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.kcFormPasswordVisibilityIconShow,
+.kcFormPasswordVisibilityIconHide {
+    color: #fff !important;
 }
