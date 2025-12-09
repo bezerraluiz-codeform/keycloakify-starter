@@ -1,0 +1,93 @@
+/* Layout base para centralizar elementos expandidos */
+.register-page-custom-wrapper .kcFormCardClass {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Header expandido para alinhar com o form */
+.register-page-custom-wrapper .kcFormHeaderClass {
+    width: 130%;
+    max-width: 130%;
+}
+
+/* Content wrapper centralizando o form */
+.register-page-custom-wrapper #kc-content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+/* Form expandido */
+.register-page-custom-wrapper #kc-register-form {
+    width: 130%;
+    max-width: 130%;
+}
+
+/* Ajustes internos do Header */
+.register-page-custom-wrapper #kc-locale {
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.register-page-custom-wrapper .kcContentWrapperClass {
+    width: 100%;
+}
+
+/* Required fields na direita */
+.register-page-custom-wrapper .subtitle {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+/* Titulo centralizado */
+.register-page-custom-wrapper .col-md-10 {
+    width: 100%;
+    text-align: center;
+    display: block;
+}
+
+/* Ajuste de largura para elementos internos do form */
+.register-page-custom-wrapper .grid {
+    width: 100%;
+    max-width: 100%;
+}
+
+.register-page-custom-wrapper #kc-form-options,
+.register-page-custom-wrapper #kc-form-buttons {
+    width: 100%;
+}
+
+/* Label dos inputs */
+.register-page-custom-wrapper .pf-c-form__group-label {
+    width: 100%;
+    text-align: center;
+    display: block;
+}
+
+/* Centraliza o ícone do botão de visibilidade da senha */
+.register-page-custom-wrapper .kcInputGroup {
+    align-items: center;
+}
+
+.register-page-custom-wrapper .kcFormPasswordVisibilityButtonClass {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 12px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+}
+
+.register-page-custom-wrapper .kcFormPasswordVisibilityButtonClass i,
+.register-page-custom-wrapper .kcFormPasswordVisibilityButtonClass svg {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 16px;
+    height: 16px;
+    line-height: 1 !important;
+}

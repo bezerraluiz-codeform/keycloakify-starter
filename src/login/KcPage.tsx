@@ -1,4 +1,5 @@
 import { Suspense, lazy } from "react";
+import type { ComponentProps } from "react";
 import type { ClassKey } from "keycloakify/login";
 import type { KcContext } from "./KcContext";
 import { useI18n } from "./i18n";
@@ -7,9 +8,18 @@ import Template from "./Template";
 import Login from "./pages/Login";
 import "./index.css";
 import "./login.css";
+import "./register.css";
 const UserProfileFormFields = lazy(
     () => import("keycloakify/login/UserProfileFormFields")
 );
+
+const UserProfileFormFieldsTwoColumns = (props: ComponentProps<typeof UserProfileFormFields>) => {
+    return (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <UserProfileFormFields {...props} />
+        </div>
+    );
+};
 
 const doMakeUserConfirmPassword = true;
 
@@ -27,6 +37,20 @@ export default function KcPage(props: { kcContext: KcContext }) {
                             <Login
                                 { ...{ kcContext, i18n, classes, Template, doUseDefaultCss: true } }
                             />
+                        );
+                    case "register.ftl":
+                        return (
+                            <div className="register-page-custom-wrapper">
+                                <DefaultPage
+                                    kcContext={kcContext}
+                                    i18n={i18n}
+                                    classes={classes}
+                                    Template={Template}
+                                    doUseDefaultCss={true}
+                                    UserProfileFormFields={UserProfileFormFieldsTwoColumns}
+                                    doMakeUserConfirmPassword={doMakeUserConfirmPassword}
+                                />
+                            </div>
                         );
                     default:
                         return (
