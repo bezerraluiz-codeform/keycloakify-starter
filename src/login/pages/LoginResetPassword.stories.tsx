@@ -20,8 +20,7 @@ export const WithEmailPreset: Story = {
     render: () => (
         <KcPageStory
             kcContext={{
-                auth: { attemptedUsername: "johndoe@example.com" },
-                login: { username: "johndoe@example.com" }
+                auth: { attemptedUsername: "johndoe@example.com" }
             }}
         />
     )
