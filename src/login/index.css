@@ -31,9 +31,35 @@ body.kcBodyClass {
 .kcLoginClass select,
 .kcLoginClass textarea {
     background-color: #000 !important;
-    border: 1px solid #2c2b2b !important;
+    border: 2px solid #2c2b2b !important;
     border-radius: 6px !important;
     color: #fff;
+}
+
+.kcLoginClass .kcInputClass:focus {
+    border-color: #fff !important;
+    border-width: 2px !important;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.kcHeaderLogo {
+    display: block;
+    max-width: 72px;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+#kc-page-title {
+    margin-top: 32px !important;
+    margin-bottom: 16px !important;
+}
+
+.kcInputClass {
+    padding: 0 12px !important;
+    height: 36px !important;
+    min-height: 36px !important;
 }
 
 .kcInputGroup,
@@ -44,12 +70,21 @@ body.kcBodyClass {
 .kcInputGroup {
     display: flex;
     align-items: stretch;
+    border: 2px solid #2c2b2b !important;
+    border-radius: 6px !important;
+    overflow: hidden;
+    transition: border-color 120ms ease;
+}
+
+.kcInputGroup:focus-within {
+    border-color: #fff !important;
+    border-width: 2px !important;
 }
 
 .kcFormPasswordVisibilityButtonClass {
-    border: 1px solid #2c2b2b !important;
-    border-left: 0 !important;
-    border-radius: 0 6px 6px 0 !important;
+    border: none !important;
+    border-left: none !important;
+    border-radius: 0 !important;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -57,15 +92,19 @@ body.kcBodyClass {
     height: 36px !important;
     min-height: 36px !important;
     box-shadow: none !important;
+    transition: background-color 120ms ease, color 120ms ease;
 }
 
 /* Ajuste para o input de senha alinhar com o botão de visibilidade */
 .kcInputGroup input[type="password"],
 .kcInputGroup input[type="text"] {
-    border-radius: 6px 0 0 6px !important;
-    border-right: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
     height: 36px !important;
     min-height: 36px !important;
+    width: 100%;
+    padding: 0 12px !important;
+    outline: none !important;
 }
 
 .kcFormPasswordVisibilityButtonClass::after,
@@ -77,4 +116,118 @@ body.kcBodyClass {
 .kcFormPasswordVisibilityIconShow,
 .kcFormPasswordVisibilityIconHide {
     color: #fff !important;
+}
+
+/* Botões primários */
+.kcButtonClass,
+#kc-login,
+.kcButtonClass.pf-c-button,
+#kc-login.pf-c-button {
+    background-color: #a9f2f7 !important;
+    border-color: #a9f2f7 !important;
+    color: #000 !important;
+    box-shadow: none !important;
+}
+
+.kcButtonClass:hover,
+#kc-login:hover,
+.kcButtonClass:focus,
+#kc-login:focus,
+.kcButtonClass.pf-c-button:hover,
+#kc-login.pf-c-button:hover,
+.kcButtonClass.pf-c-button:focus,
+#kc-login.pf-c-button:focus {
+    background-color: #a9e6f7 !important;
+    border-color: #a9e6f7 !important;
+    color: #000 !important;
+    box-shadow: none !important;
+}
+
+/* Dropdown de idiomas */
+#kc-locale {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    min-width: 140px;
+}
+
+.kcLocaleDropDownClass {
+    background-color: #000 !important;
+    border: none !important;
+    border-radius: 4px !important;
+    color: #fff !important;
+    box-shadow: none !important;
+    width: 140px;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.kcLocaleDropDownClass > button {
+    color: #fff !important;
+    padding: 6px 10px !important;
+    background: transparent !important;
+    border: 1px solid #2c2b2b !important;
+    width: 100%;
+    text-align: left;
+    border-radius: 4px 4px 0 0 !important;
+    position: relative;
+    padding-right: 28px !important;
+}
+
+.kcLocaleListClass {
+    background-color: #000 !important;
+    border: 1px solid #2c2b2b !important;
+    border-top: 0 !important;
+    border-radius: 0 0 4px 4px !important;
+    color: #fff !important;
+    padding: 6px 0 !important;
+    margin-top: 6px !important;
+    box-shadow: none !important;
+    width: 140px;
+    box-sizing: border-box;
+    text-align: left;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 5;
+}
+
+.kcLocaleListItemClass {
+    list-style: none !important;
+    margin: 0 !important;
+}
+
+.kcLocaleItemClass {
+    color: #fff !important;
+    padding: 8px 12px !important;
+    display: block;
+    border: 2px solid transparent !important;
+    border-radius: 6px !important;
+    transition: border-color 120ms ease;
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+/* Ícone customizado do dropdown de idioma */
+.kcLocaleDropDownClass > button::after {
+    content: "▾";
+    color: #fff;
+    font-size: 12px;
+    line-height: 1;
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.kcLocaleItemClass:hover,
+.kcLocaleItemClass:focus {
+    background-color: #121212 !important;
+    color: #fff !important;
+    border-color: #fff !important;
+}
+
+.kcLocaleMainClass {
+    margin-top: 0px !important;
 }

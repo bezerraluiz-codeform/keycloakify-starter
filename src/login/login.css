@@ -1,0 +1,34 @@
+/* Alinhamento do checkbox de remember me */
+#kc-form-options .checkbox {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#kc-form-options .checkbox label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.25;
+    padding: 0 !important;
+    position: static !important;
+}
+
+#kc-form-options .checkbox input[type="checkbox"] {
+    margin: 0;
+    position: static !important;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+}
+
+/* Cores dos links de opções e registro */
+.kcFormOptionsWrapperClass a,
+#kc-registration a {
+    color: #a9f2f7 !important;
+}
+
+.kcFormOptionsWrapperClass a:hover,
+#kc-registration a:hover {
+    color: #a9e6f7 !important;
+}
