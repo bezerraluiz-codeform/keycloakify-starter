@@ -91,3 +91,76 @@
     height: 16px;
     line-height: 1 !important;
 }
+
+/* Ajusta contraste e legibilidade do bloco de termos */
+.register-page-custom-wrapper .form-group {
+    color: #e5e7eb;
+}
+
+.register-page-custom-wrapper #kc-registration-terms-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: #e5e7eb;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Centraliza o título + link em linha no bloco de termos */
+.register-page-custom-wrapper .form-group:has(#kc-registration-terms-text) .kcInputWrapperClass {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px;
+    flex-wrap: wrap;
+    width: 100%;
+    text-align: left;
+}
+
+.register-page-custom-wrapper #kc-registration-terms-text a {
+    color: #a9f2f7 !important;
+    text-decoration: underline;
+}
+
+.register-page-custom-wrapper #kc-registration-terms-text a:hover {
+    color: #a9e6f7 !important;
+}
+
+.register-page-custom-wrapper #termsAccepted {
+    accent-color: #a9f2f7;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    margin: 0;
+}
+
+.register-page-custom-wrapper label[for="termsAccepted"] {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #f8fafc !important;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+/* Centraliza o grupo do checkbox de aceitação */
+.register-page-custom-wrapper .form-group:has(#termsAccepted) .kcLabelWrapperClass {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+/* Estiliza o reCAPTCHA para centralização */
+.register-page-custom-wrapper .form-group:has(.g-recaptcha) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.register-page-custom-wrapper .g-recaptcha {
+    margin: 16px auto;
+    width: 50%;
+}

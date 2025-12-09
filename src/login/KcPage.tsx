@@ -6,6 +6,7 @@ import { useI18n } from "./i18n";
 import DefaultPage from "keycloakify/login/DefaultPage";
 import Template from "./Template";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import "./index.css";
 import "./login.css";
 import "./register.css";
@@ -41,7 +42,7 @@ export default function KcPage(props: { kcContext: KcContext }) {
                     case "register.ftl":
                         return (
                             <div className="register-page-custom-wrapper">
-                                <DefaultPage
+                                <Register
                                     kcContext={kcContext}
                                     i18n={i18n}
                                     classes={classes}

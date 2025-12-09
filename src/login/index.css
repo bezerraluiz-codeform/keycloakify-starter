@@ -73,11 +73,13 @@ body.kcBodyClass {
 }
 
 /* Mantém grupo da senha vermelho enquanto inválido */
-.kcLoginClass .kcInputGroup.kcInputGroupInvalid {
+.kcLoginClass .kcInputGroup.kcInputGroupInvalid,
+.kcLoginClass .kcInputGroup:has(.kcInputClass[aria-invalid="true"]) {
     border-color: #ff4d4f !important;
 }
 
-.kcLoginClass .kcInputGroup.kcInputGroupInvalid:focus-within {
+.kcLoginClass .kcInputGroup.kcInputGroupInvalid:focus-within,
+.kcLoginClass .kcInputGroup:has(.kcInputClass[aria-invalid="true"]):focus-within {
     border-color: #ff4d4f !important;
 }
 
