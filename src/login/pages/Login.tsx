@@ -7,6 +7,47 @@ import { getKcClsx, type KcClsx } from "keycloakify/login/lib/kcClsx";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import "../login.css";
+import googleIcon from "../assets/google.svg";
+import facebookIcon from "../assets/facebook.svg";
+import instagramIcon from "../assets/instagram.svg";
+import linkedinIcon from "../assets/linkedin.svg";
+
+const socialProviderIconMap: Record<string, string> = {
+    google: googleIcon,
+    facebook: facebookIcon,
+    instagram: instagramIcon,
+    linkedin: linkedinIcon
+};
+
+function getSocialProviderIconUrl(params: { alias: string; displayName?: string }): string | undefined {
+    // Função utilitária para resolver o ícone SVG customizado com base no alias/nome do provedor
+    const { alias, displayName } = params;
+
+    const normalizedAlias = alias.toLowerCase();
+    const normalizedName = (displayName ?? "").toLowerCase();
+
+    if (socialProviderIconMap[normalizedAlias]) {
+        return socialProviderIconMap[normalizedAlias];
+    }
+
+    if (normalizedAlias.includes("google") || normalizedName.includes("google")) {
+        return socialProviderIconMap.google;
+    }
+
+    if (normalizedAlias.includes("facebook") || normalizedName.includes("facebook")) {
+        return socialProviderIconMap.facebook;
+    }
+
+    if (normalizedAlias.includes("instagram") || normalizedName.includes("instagram")) {
+        return socialProviderIconMap.instagram;
+    }
+
+    if (normalizedAlias.includes("linkedin") || normalizedName.includes("linkedin")) {
+        return socialProviderIconMap.linkedin;
+    }
+
+    return undefined;
+}
 
 export default function Login(props: PageProps<Extract<KcContext, { pageId: "login.ftl" }>, I18n>) {
     const { kcContext, i18n, doUseDefaultCss, Template, classes } = props;
@@ -22,13 +63,15 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
 
     const [isLoginButtonDisabled, setIsLoginButtonDisabled] = useState(false);
 
+    const hasCredentialError = messagesPerField.existsError("username", "password");
+
     return (
         <Template
             kcContext={kcContext}
             i18n={i18n}
             doUseDefaultCss={doUseDefaultCss}
             classes={classes}
-            displayMessage={!messagesPerField.existsError("username", "password")}
+            displayMessage={!hasCredentialError}
             headerNode={msg("loginAccountTitle")}
             displayInfo={realm.password && realm.registrationAllowed && !registrationDisabled}
             infoNode={
@@ -50,25 +93,46 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                             <hr />
                             <h2>{msg("identity-provider-login-label")}</h2>
                             <ul className={kcClsx("kcFormSocialAccountListClass", social.providers.length > 3 && "kcFormSocialAccountListGridClass")}>
-                                {social.providers.map((...[p, , providers]) => (
-                                    <li key={p.alias}>
-                                        <a
-                                            id={`social-${p.alias}`}
-                                            className={kcClsx(
-                                                "kcFormSocialAccountListButtonClass",
-                                                providers.length > 3 && "kcFormSocialAccountGridItem"
-                                            )}
-                                            type="button"
-                                            href={p.loginUrl}
-                                        >
-                                            {p.iconClasses && <i className={clsx(kcClsx("kcCommonLogoIdP"), p.iconClasses)} aria-hidden="true"></i>}
-                                            <span
-                                                className={clsx(kcClsx("kcFormSocialAccountNameClass"), p.iconClasses && "kc-social-icon-text")}
-                                                dangerouslySetInnerHTML={{ __html: kcSanitize(p.displayName) }}
-                                            ></span>
-                                        </a>
-                                    </li>
-                                ))}
+                                {social.providers.map((...[p, , providers]) => {
+                                    const iconUrl = getSocialProviderIconUrl({
+                                        alias: p.alias,
+                                        displayName: p.displayName
+                                    });
+
+                                    const providerLabel = p.displayName ?? p.alias;
+
+                                    return (
+                                        <li key={p.alias}>
+                                            <a
+                                                id={`social-${p.alias}`}
+                                                className={clsx(
+                                                    kcClsx(
+                                                        "kcFormSocialAccountListButtonClass",
+                                                        providers.length > 3 && "kcFormSocialAccountGridItem"
+                                                    ),
+                                                    "custom-social-btn"
+                                                )}
+                                                type="button"
+                                                href={p.loginUrl}
+                                            >
+                                                {iconUrl ? (
+                                                    <img src={iconUrl} alt={providerLabel} className="socialProviderIcon" />
+                                                ) : (
+                                                    p.iconClasses && (
+                                                        <i className={clsx(kcClsx("kcCommonLogoIdP"), p.iconClasses)} aria-hidden="true"></i>
+                                                    )
+                                                )}
+                                                <span
+                                                    className={clsx(
+                                                        kcClsx("kcFormSocialAccountNameClass"),
+                                                        !iconUrl && p.iconClasses && "kc-social-icon-text"
+                                                    )}
+                                                    dangerouslySetInnerHTML={{ __html: kcSanitize(providerLabel) }}
+                                                ></span>
+                                            </a>
+                                        </li>
+                                    );
+                                })}
                             </ul>
                         </div>
                     )}
@@ -99,15 +163,15 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                     <input
                                         tabIndex={2}
                                         id="username"
-                                        className={kcClsx("kcInputClass")}
+                                        className={clsx(kcClsx("kcInputClass"), hasCredentialError && "kcInputInvalid")}
                                         name="username"
                                         defaultValue={login.username ?? ""}
                                         type="text"
                                         autoFocus
                                         autoComplete="username"
-                                        aria-invalid={messagesPerField.existsError("username", "password")}
+                                        aria-invalid={hasCredentialError}
                                     />
-                                    {messagesPerField.existsError("username", "password") && (
+                                    {hasCredentialError && (
                                         <span
                                             id="input-error"
                                             className={kcClsx("kcInputErrorMessageClass")}
@@ -124,7 +188,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                 <label htmlFor="password" className={kcClsx("kcLabelClass")}>
                                     {msg("password")}
                                 </label>
-                                <PasswordWrapper kcClsx={kcClsx} i18n={i18n} passwordInputId="password">
+                                <PasswordWrapper kcClsx={kcClsx} i18n={i18n} passwordInputId="password" isInvalid={hasCredentialError}>
                                     <input
                                         tabIndex={3}
                                         id="password"
@@ -132,10 +196,10 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                         name="password"
                                         type="password"
                                         autoComplete="current-password"
-                                        aria-invalid={messagesPerField.existsError("username", "password")}
+                                        aria-invalid={hasCredentialError}
                                     />
                                 </PasswordWrapper>
-                                {usernameHidden && messagesPerField.existsError("username", "password") && (
+                                {usernameHidden && hasCredentialError && (
                                     <span
                                         id="input-error"
                                         className={kcClsx("kcInputErrorMessageClass")}
@@ -198,8 +262,8 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
     );
 }
 
-function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: string; children: JSX.Element }) {
-    const { kcClsx, i18n, passwordInputId, children } = props;
+function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: string; isInvalid: boolean; children: JSX.Element }) {
+    const { kcClsx, i18n, passwordInputId, isInvalid, children } = props;
 
     const { msgStr } = i18n;
 
@@ -214,7 +278,7 @@ function PasswordWrapper(props: { kcClsx: KcClsx; i18n: I18n; passwordInputId: s
     }, [isPasswordRevealed]);
 
     return (
-        <div className={kcClsx("kcInputGroup")}>
+        <div className={clsx(kcClsx("kcInputGroup"), isInvalid && "kcInputGroupInvalid")}>
             {children}
             <button
                 type="button"
