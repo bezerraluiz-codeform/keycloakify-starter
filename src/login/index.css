@@ -4,7 +4,7 @@
 
 /* Fundo preto, sem imagem, com fonte Geist */
 body.kcBodyClass {
-    @apply bg-black bg-no-repeat bg-center bg-fixed font-geist;
+    @apply flex items-center justify-center bg-black bg-no-repeat bg-center bg-fixed font-geist;
     background-image: none !important;
 }
 
@@ -126,15 +126,21 @@ body.kcBodyClass {
 
 .kcHeaderLogo {
     display: block;
-    max-width: 72px;
+    max-width: 56px;
     width: 100%;
     height: auto;
     margin: 0 auto;
 }
 
+.kcFormHeaderClass .kcHeaderLogoWrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 4px;
+}
+
 #kc-page-title {
-    margin-top: 32px !important;
-    margin-bottom: 16px !important;
+    margin-top: 12px !important;
+    margin-bottom: 10px !important;
 }
 
 .kcInputClass {
